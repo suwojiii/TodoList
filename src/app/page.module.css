@@ -1,0 +1,38 @@
+.container {
+  width: 80%;
+  max-width: 960px;
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.todo,
+.done {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo > h2 {
+  height: 36px;
+
+  background-image: url("/icons/todo.png");
+  background-repeat: no-repeat;
+}
+
+.done > h2 {
+  height: 36px;
+
+  background-image: url("/icons/done.png");
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .listContainer {
+    flex-direction: row;
+  }
+}

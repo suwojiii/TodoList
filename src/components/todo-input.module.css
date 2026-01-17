@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  height: 56px;
+}
+
+.container > input {
+  flex: 1;
+  padding: 0 20px;
+
+  border: 2px solid var(--color-slate900);
+  border-radius: 50px;
+  background-color: var(--color-slate100);
+
+  box-shadow: 2px 4px 0 var(--color-slate900);
+
+  outline: none;
+}
+
+.container > button {
+  width: 56px;
+  border: 2px solid var(--color-slate900);
+  border-radius: 45%;
+  background-color: var(--color-slate100);
+
+  box-shadow: 2px 4px 0 var(--color-slate900);
+
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .container > button {
+    width: 168px;
+    border-radius: 50px;
+
+    font-size: 17px;
+  }
+
+  .container > button::after {
+    content: " 추가하기";
+  }
+}

@@ -1,0 +1,48 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "NanumSquare";
+  src: url("/fonts/NanumSquareR.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family:
+    "NanumSquare",
+    -apple-system,
+    BlinkMacSystemFont;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-slate800);
+}
+
+:root {
+  --color-slate900: #0f172a;
+  --color-slate800: #1e293b;
+  --color-slate500: #64748b;
+  --color-slate400: #94a3b8;
+  --color-slate300: #cbd5e1;
+  --color-slate200: #e2e8f0;
+  --color-slate100: #f1f5f9;
+  --color-slate50: #f8fafc;
+
+  --color-violet600: #7c3aed;
+  --color-violet100: #ede9fe;
+
+  --color-rose500: #f43f5e;
+  --color-lime300: #bef264;
+
+  --color-amber800: #92400e;
+}
