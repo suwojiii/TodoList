@@ -9,7 +9,7 @@ export default function TodoItem({ id, name, isCompleted }: TodoItemData) {
   const handleToggle = async () => {
     await completedTodoAction(id, !isCompleted);
   };
-  console.log(id, name, isCompleted);
+
   return (
     <div className={`${style.container} ${isCompleted ? style.completed : ""}`}>
       <button onClick={handleToggle} className={style.checkButton} />
