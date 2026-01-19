@@ -45,7 +45,7 @@ export function TodoDetail({
 
     const ext = file.name.split(".").pop()?.toLowerCase();
     const okExt = ["jpg", "jpeg", "png", "webp"].includes(ext ?? "");
-
+    console.log(file);
     if (!okType || !okExt) {
       alert("JPEG/PNG/WEBP 이미지만 가능합니다.");
       e.target.value = "";
@@ -63,17 +63,19 @@ export function TodoDetail({
       e.target.value = "";
       return;
     }
-    const previewUrl = URL.createObjectURL(file);
-    setDraftImageUrl(previewUrl);
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "");
+    const key = `todos/${Date.now()}-${safeName}`;
 
     try {
-      const { url } = await upload(`todos/${file.name}`, file, {
+      const { url } = await upload(key, file, {
         handleUploadUrl: "/upload",
         access: "public",
       });
 
       setDraftImageUrl(url);
     } catch (err) {
+      setDraftImageUrl("");
       alert("이미지 업로드에 실패했습니다.");
       console.log(err);
     }

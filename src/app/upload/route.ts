@@ -17,7 +17,6 @@ export async function POST(request: Request) {
           "image/webp",
         ],
         maximumSizeInBytes: 5 * 1024 * 1024,
-        addRandomSuffix: true,
       };
     },
   });
