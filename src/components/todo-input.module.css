@@ -28,6 +28,7 @@
   box-shadow: 2px 4px 0 var(--color-slate900);
 
   font-size: 28px;
+  color: var(--color-slate900);
   cursor: pointer;
 }
 
