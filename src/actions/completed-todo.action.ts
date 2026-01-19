@@ -15,9 +15,8 @@ export async function completedTodoAction(id: number, isCompleted: boolean) {
         body: JSON.stringify({ isCompleted }),
       },
     );
-    console.log(response);
+
     const data = await response.json();
-    console.log("toggle response json:", data);
 
     if (!response.ok) {
       throw new Error(response.statusText);
