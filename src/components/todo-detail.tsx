@@ -37,6 +37,18 @@ export function TodoDetail({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const okType = ["image/jpeg", "image/png", "image/webp"].includes(
+      file.type,
+    );
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    const okExt = ["jpg", "jpeg", "png", "webp"].includes(ext ?? "");
+
+    if (!okType || !okExt) {
+      alert("JPEG/PNG/WEBP 이미지만 가능합니다.");
+      e.target.value = "";
+      return;
+    }
+
     if (file.size > 5 * 1024 * 1024) {
       alert("이미지 파일 크기는 5MB 이하만 가능합니다.");
       e.target.value = "";
