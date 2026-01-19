@@ -37,9 +37,12 @@ export function TodoDetail({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const okType = ["image/jpeg", "image/png", "image/webp"].includes(
-      file.type,
-    );
+    const type = file.type?.toLowerCase();
+
+    const okType =
+      !type ||
+      ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(type);
+
     const ext = file.name.split(".").pop()?.toLowerCase();
     const okExt = ["jpg", "jpeg", "png", "webp"].includes(ext ?? "");
 
