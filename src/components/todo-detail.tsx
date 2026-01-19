@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { editTodoAction } from "@/actions/edit-todo.action";
 import { deleteTodoAction } from "@/actions/delete-todo.action";
+import { upload } from "@vercel/blob/client";
 
 export function TodoDetail({
   id,
@@ -25,7 +26,6 @@ export function TodoDetail({
     name,
     memo: draftMemo,
     imageUrl: draftImageUrl,
-    // imageUrl: "/imgs/mockImg.jpeg",
     isCompleted,
   };
 
@@ -33,21 +33,42 @@ export function TodoDetail({
     await completedTodoAction(Number(id), !isCompleted);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("....");
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    console.log("----", file);
     if (!file) return;
 
+    if (file.size > 5 * 1024 * 1024) {
+      alert("이미지 파일 크기는 5MB 이하만 가능합니다.");
+      e.target.value = "";
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9._-]+$/.test(file.name)) {
+      alert("이미지 파일 이름은 영문만 사용할 수 있습니다.");
+      e.target.value = "";
+      return;
+    }
     const previewUrl = URL.createObjectURL(file);
     setDraftImageUrl(previewUrl);
+
+    try {
+      const { url } = await upload(`todos/${file.name}`, file, {
+        handleUploadUrl: "/upload",
+        access: "public",
+      });
+
+      setDraftImageUrl(url);
+    } catch (err) {
+      alert("이미지 업로드에 실패했습니다.");
+      console.log(err);
+    }
   };
 
   const editMemo = async () => {
-    const res = await editTodoAction(todo);
+    const response = await editTodoAction(todo);
 
-    if (!res?.status) {
-      alert(res?.error);
+    if (!response?.status) {
+      alert(response?.error);
       return;
     }
 
